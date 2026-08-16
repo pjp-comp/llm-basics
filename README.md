@@ -23,8 +23,8 @@ and runnable examples.
 | 2. NLP & Transformers | [phase-02-transformers](phase-02-transformers/) | ready — 2 examples |
 | 3. Hugging Face Basics | [phase-03-huggingface-basics](phase-03-huggingface-basics/) | ready — 2 examples |
 | 4. Chat Templates | [phase-04-chat-templates](phase-04-chat-templates/) | ready — 4 examples |
-| 5. RAG | [phase-05-rag](phase-05-rag/) | planned |
-| 6. Fine-tuning Basics | [phase-06-finetuning-basics](phase-06-finetuning-basics/) | planned |
+| 5. RAG | [phase-05-rag](phase-05-rag/) | ready — 5 examples |
+| 6. Fine-tuning Basics | [phase-06-finetuning-basics](phase-06-finetuning-basics/) | ready — 3 examples |
 | 7. Datasets | [phase-07-datasets](phase-07-datasets/) | planned |
 | 8. Training Workflow | [phase-08-training-workflow](phase-08-training-workflow/) | planned |
 | 9. Loss Masking | [phase-09-loss-masking](phase-09-loss-masking/) | planned |
@@ -52,17 +52,22 @@ See [tools/README.md](tools/README.md).
 
 ## Setup
 
-**Base install** — works on Mac, Linux, and Windows:
+This repo uses [uv](https://docs.astral.sh/uv/). One command installs everything:
 
 ```bash
-pip install transformers datasets accelerate peft trl sentencepiece
+uv sync
 ```
 
-**For the RAG phase:**
+Then run any example with `uv run python <path>`.
+
+<details>
+<summary>Using pip instead</summary>
 
 ```bash
-pip install sentence-transformers faiss-cpu
+pip install transformers datasets accelerate peft trl sentencepiece \
+            sentence-transformers faiss-cpu ollama torch
 ```
+</details>
 
 **Only if you have an NVIDIA GPU** — `bitsandbytes` allows 4-bit training (QLoRA):
 

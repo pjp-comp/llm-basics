@@ -61,3 +61,4 @@ raw_data/
 # Local notebooks or scratch files
 scratch/
 notes/
+.index/

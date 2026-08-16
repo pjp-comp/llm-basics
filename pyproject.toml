@@ -16,6 +16,8 @@ dependencies = [
   "numpy>=1.26.0",
   "pandas>=2.2.0",
   "torch>=2.4.0",
+  "sentence-transformers>=5.7.0",
+  "faiss-cpu>=1.15.0",
 ]
 
 [tool.uv]
