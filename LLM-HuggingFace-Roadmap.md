@@ -15,8 +15,9 @@ This is a practical roadmap, not just theory.
 
 ## How to use this document
 
-Go through the 14 phases in order. Each phase has:
+Go through the 15 phases in order. Each phase has:
 
+- **Folder** — runnable examples you can execute
 - **Goal** — what you are trying to learn
 - **Topics** — what to study
 - **Done when** — how you know you can move on
@@ -122,6 +123,25 @@ You don't need to master all of these now. Just know what each one is for.
 
 **One thing to add early: experiment tracking.** Use TensorBoard (free, no account) or Weights & Biases (`wandb`). This shows you a graph of whether training is actually working, instead of staring at numbers scrolling by. `SFTTrainer` connects to both with one line of config.
 
+### Tools in this repo
+
+The [`tools/`](tools/) folder has small utilities for seeing what a model is doing.
+You can use them from Phase 1 onward:
+
+| Tool | What it does |
+|---|---|
+| `inspect_model.py` | Model size, tokenization, next-token predictions, speed, model-vs-model comparison |
+| `evaluate.py` | Run two models on the same questions; optionally score with a judge model |
+| `llmkit.py` | Importable helpers — `TrainingMonitor`, `Timer`, `print_model_size`, and more |
+
+```bash
+uv run python tools/inspect_model.py --predict "The capital of France is"
+uv run python tools/evaluate.py --a llama3.2:3b --b qwen3:1.7b
+```
+
+See [`tools/README.md`](tools/README.md) for the full list. These are learning
+aids — for real training runs use TensorBoard or W&B.
+
 ---
 
 ## 4. What computer do you need?
@@ -155,6 +175,8 @@ Keep your dataset saved in your project folder, not only inside a notebook. Note
 
 ### Phase 1: Foundations
 
+**Folder:** [`phase-01-foundations/`](phase-01-foundations/)
+
 #### Goal
 Understand how neural networks learn.
 
@@ -178,6 +200,8 @@ You can write a small training loop yourself and explain what each line does: fo
 ---
 
 ### Phase 2: NLP and Transformer Basics
+
+**Folder:** [`phase-02-transformers/`](phase-02-transformers/)
 
 #### Goal
 Learn the pieces that modern LLMs are built from.
@@ -204,6 +228,8 @@ You can explain how a sentence travels through a model: text → tokens → embe
 ---
 
 ### Phase 3: Hugging Face Basics
+
+**Folder:** [`phase-03-huggingface-basics/`](phase-03-huggingface-basics/)
 
 #### Goal
 Actually load and run a real model.
@@ -234,6 +260,8 @@ Try this: set `temperature` to 0.1, then to 1.5, and see how the answers change.
 ---
 
 ### Phase 4: Chat Templates
+
+**Folder:** [`phase-04-chat-templates/`](phase-04-chat-templates/)
 
 #### Goal
 Learn how to format prompts the way each model expects.
@@ -295,6 +323,8 @@ So if your goal is "the model should know what's in our documents," the answer i
 
 ### Phase 5: RAG (Retrieval-Augmented Generation)
 
+**Folder:** [`phase-05-rag/`](phase-05-rag/)
+
 #### Goal
 Let a model answer questions about your own documents, without training it.
 
@@ -329,6 +359,8 @@ You have built a small Q&A system over a folder of your own documents, and you u
 
 ### Phase 6: Fine-Tuning Basics
 
+**Folder:** [`phase-06-finetuning-basics/`](phase-06-finetuning-basics/)
+
 #### Goal
 Understand the difference between *using* a model and *changing* it.
 
@@ -358,6 +390,8 @@ You can say your goal in one sentence, and explain how you would check whether i
 ---
 
 ### Phase 7: Building Your Dataset
+
+**Folder:** [`phase-07-datasets/`](phase-07-datasets/)
 
 #### Goal
 Build the examples you will train on.
@@ -417,6 +451,8 @@ You have a cleaned, split dataset saved as a JSONL file — **and you have perso
 
 ### Phase 8: The Training Workflow
 
+**Folder:** [`phase-08-training-workflow/`](phase-08-training-workflow/)
+
 #### Goal
 Learn the tools people actually use to fine-tune models today.
 
@@ -450,6 +486,8 @@ Your training script runs start to finish without errors, and your loss graph go
 
 ### Phase 9: Prompt Loss Masking (important)
 
+**Folder:** [`phase-09-loss-masking/`](phase-09-loss-masking/)
+
 #### Goal
 Make sure the model learns to write *answers*, not to repeat *questions*.
 
@@ -471,6 +509,8 @@ You understand why we mask the prompt, and you can check that it worked. When ma
 ---
 
 ### Phase 10: LoRA and PEFT
+
+**Folder:** [`phase-10-lora-peft/`](phase-10-lora-peft/)
 
 #### Goal
 Learn the cheap training method that makes all of this possible on small hardware.
@@ -510,6 +550,8 @@ You can explain what rank controls, and why training under 1% of a model still c
 ---
 
 ### Phase 11: Fine-tune a Small Model
+
+**Folder:** [`phase-11-finetune-small-llm/`](phase-11-finetune-small-llm/)
 
 #### Goal
 Put it all together and actually train something.
@@ -558,6 +600,8 @@ After SFT, real production models get another round of training on *preference* 
 
 ### Phase 12: Testing Your Model Properly
 
+**Folder:** [`phase-12-evaluation/`](phase-12-evaluation/)
+
 #### Goal
 Find out if your model is actually better, not just different.
 
@@ -593,6 +637,8 @@ You have a held-out test set, a side-by-side comparison against the original mod
 ---
 
 ### Phase 13: Export and Merge
+
+**Folder:** [`phase-13-export-merge/`](phase-13-export-merge/)
 
 #### Goal
 Turn your trained adapter into a normal model file you can use anywhere.
@@ -631,6 +677,8 @@ You have a merged model saved on disk, and either uploaded it to the Hub or conv
 
 ### Phase 14: Running It Locally
 
+**Folder:** [`phase-14-local-inference/`](phase-14-local-inference/)
+
 #### Goal
 Use your model outside a notebook.
 
@@ -644,6 +692,43 @@ Use your model outside a notebook.
 Your model answers a question from somewhere other than a notebook — a terminal, a script, or a small local app.
 
 **Rough time:** 3–5 days.
+
+---
+
+### Phase 15: Build your own tiny LLM (optional)
+
+**Folder:** [`phase-15-build-your-own-llm/`](phase-15-build-your-own-llm/)
+
+#### Goal
+Write a complete GPT from scratch — tokenizer, attention, transformer blocks,
+training loop — in a few hundred lines, and train it on your own text.
+
+#### Why do this
+Phases 1–14 teach you to *use* models others built. This phase removes the last
+of the magic: you implement every piece yourself and watch it learn.
+
+The model will be tiny and its output will be charming nonsense. That is fine —
+the goal is understanding, not quality. After this, words like "attention head",
+"context length", and "embedding dimension" stop being jargon, because you wrote them.
+
+#### Topics
+- a character-level tokenizer you build yourself
+- token and position embeddings
+- self-attention, implemented by hand
+- multi-head attention, feed-forward layers, residual connections
+- stacking blocks into a transformer
+- the training loop, on your own text file
+- sampling text from your trained model
+
+#### Done when
+You have trained your own model from scratch and generated text with it, and you
+can point at each part of the code and say what it does.
+
+#### Resources
+- [Karpathy — Let's build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+- [nanoGPT](https://github.com/karpathy/nanoGPT) — the clean reference implementation
+
+**Rough time:** 1–2 weeks. Runs on a Mac; no GPU needed.
 
 ---
 
@@ -694,6 +779,9 @@ The 14 phases group into four stages:
 
 **Stage D — Check and ship (Phases 12–14).** Test properly, merge and export, run locally.
 
+**Stage E — Go deeper (Phase 15, optional).** Build a tiny GPT from scratch to
+remove the last of the magic.
+
 **Don't jump straight to Stage C.** The usual failure is training a big model on data nobody looked at, getting a bad result, and having no idea why.
 
 ---
@@ -731,6 +819,7 @@ Keep it small and realistic.
 - [ ] compare your model against the original on a test set
 - [ ] merge and export your adapter
 - [ ] convert to GGUF and run it locally
+- [ ] *(optional)* write your own transformer from scratch and train it
 
 ---
 
@@ -758,5 +847,9 @@ The beginner path is **not** "download a huge model and hope it works." It is:
 4. Fine-tune a small model with LoRA
 5. Compare against the original model, not against the loss number
 6. Merge, shrink, and run it locally
+
+Then, if you want to remove the last of the mystery, build a tiny GPT from
+scratch (Phase 15). It is optional, but nothing else teaches the internals
+as thoroughly.
 
 Start with a small model, a small dataset, a clear task, and honest testing. That is how you get good at this.

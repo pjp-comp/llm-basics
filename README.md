@@ -5,17 +5,50 @@ Learning how to work with LLMs (Large Language Models) using Hugging Face — st
 ## Where to start
 
 - [LLM-HuggingFace-Roadmap.md](LLM-HuggingFace-Roadmap.md) — the full roadmap, from Python basics to training your own small model
+- [phase-01-foundations/](phase-01-foundations/) — start running code here
 
-## The path
+```bash
+uv sync
+uv run python phase-01-foundations/01_tensors.py
+```
 
-1. Read the roadmap first
-2. Learn Python, PyTorch, and NLP basics
-3. Load and run models with Hugging Face
-4. Learn chat templates (small topic, saves a lot of pain)
-5. Build a RAG demo — and learn when you *don't* need to train a model
-6. Learn LoRA and fine-tune a small model
-7. Test your model properly and improve your data
-8. Export it and run it on your own computer
+## Phases
+
+Each folder matches a phase in the roadmap, with a README explaining the concepts
+and runnable examples.
+
+| Phase | Folder | Status |
+|---|---|---|
+| 1. Foundations | [phase-01-foundations](phase-01-foundations/) | ready — 3 examples |
+| 2. NLP & Transformers | [phase-02-transformers](phase-02-transformers/) | ready — 2 examples |
+| 3. Hugging Face Basics | [phase-03-huggingface-basics](phase-03-huggingface-basics/) | ready — 2 examples |
+| 4. Chat Templates | [phase-04-chat-templates](phase-04-chat-templates/) | ready — 4 examples |
+| 5. RAG | [phase-05-rag](phase-05-rag/) | planned |
+| 6. Fine-tuning Basics | [phase-06-finetuning-basics](phase-06-finetuning-basics/) | planned |
+| 7. Datasets | [phase-07-datasets](phase-07-datasets/) | planned |
+| 8. Training Workflow | [phase-08-training-workflow](phase-08-training-workflow/) | planned |
+| 9. Loss Masking | [phase-09-loss-masking](phase-09-loss-masking/) | planned |
+| 10. LoRA & PEFT | [phase-10-lora-peft](phase-10-lora-peft/) | planned |
+| 11. Fine-tune a Model | [phase-11-finetune-small-llm](phase-11-finetune-small-llm/) | planned |
+| 12. Evaluation | [phase-12-evaluation](phase-12-evaluation/) | planned |
+| 13. Export & Merge | [phase-13-export-merge](phase-13-export-merge/) | planned |
+| 14. Run Locally | [phase-14-local-inference](phase-14-local-inference/) | planned |
+| 15. Build Your Own LLM | [phase-15-build-your-own-llm](phase-15-build-your-own-llm/) | planned |
+
+## Tools
+
+[`tools/`](tools/) has utilities for seeing what a model is doing — usable from
+Phase 1 onward:
+
+```bash
+# model size, tokenization, predictions, speed
+uv run python tools/inspect_model.py --predict "The capital of France is"
+
+# compare two models on the same questions
+uv run python tools/evaluate.py --a llama3.2:3b --b qwen3:1.7b
+```
+
+See [tools/README.md](tools/README.md).
 
 ## Setup
 
